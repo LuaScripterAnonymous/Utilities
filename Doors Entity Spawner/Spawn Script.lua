@@ -3,7 +3,7 @@ local Creator = loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaSc
 -- Create entity
 local entity = Creator.createEntity({
     CustomName = "PresetEntity", -- Custom name of your entity
-    Model = "https://github.com/RegularVynixu/Utilities/blob/main/Doors%20Entity%20Spawner/Models/Rush.rbxm?raw=true", -- Can be GitHub file or rbxassetid
+    Model = "https://github.com/LuaScripterAnonymous/Utilities/blob/main/Doors%20Entity%20Spawner/All%20Entitys/Entitys%20(normal)/Rush.rbxm?raw=true", -- Can be GitHub file or rbxassetid
     Speed = 100, -- Percentage, 100 = default Rush speed
     DelayTime = 2, -- Time before starting cycles (seconds)
     HeightOffset = 0,
