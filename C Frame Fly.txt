@@ -1,0 +1,92 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("CFrame Fly | Anonymous#4915", "DarkTheme")
+local FlyTab = Window:NewTab("Fly")
+local FlySection = FlyTab:NewSection("Fly Settings")
+
+-- SETUP
+_G.FlySpeed = 50
+if _G.Setup then
+    game.Players.LocalPlayer:Kick("[WARNING] Already executed CFrameFly!")
+else
+    _G.Setup = true
+end
+
+-- UI And Fly Functions
+FlySection:NewButton("Fly (KeyBind 'G')", "Set Player to Fly (KeyBind = G)!", function()
+    spawn(function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaScripterAnonymous/Utilities/main/Fly%20Bypass.lua"))()
+
+        local UIS = game:GetService("UserInputService")
+        local OnRender = game:GetService("RunService").RenderStepped
+        
+        local Player = game:GetService("Players").LocalPlayer
+        local Character = Player.Character or Player.CharacterAdded:Wait()
+        
+        local Camera = workspace.CurrentCamera
+        local Root = Character:WaitForChild("HumanoidRootPart")
+        local C1, C2, C3;
+        local Nav = {Flying = false, Forward = false, Backward = false, Left = false, Right = false}
+        C1 = UIS.InputBegan:Connect(function(Input)
+            if Input.UserInputType == Enum.UserInputType.Keyboard then
+                if Input.KeyCode == Enum.KeyCode.G then
+                    Nav.Flying = not Nav.Flying
+                    Root.Anchored = Nav.Flying
+                elseif Input.KeyCode == Enum.KeyCode.W then
+                    Nav.Forward = true
+                elseif Input.KeyCode == Enum.KeyCode.S then
+                    Nav.Backward = true
+                elseif Input.KeyCode == Enum.KeyCode.A then
+                    Nav.Left = true
+                elseif Input.KeyCode == Enum.KeyCode.D then
+                    Nav.Right = true
+                end
+            end
+        end)
+        
+        C2 = UIS.InputEnded:Connect(function(Input)
+            if Input.UserInputType == Enum.UserInputType.Keyboard then
+                if Input.KeyCode == Enum.KeyCode.W then
+                    Nav.Forward = false
+                elseif Input.KeyCode == Enum.KeyCode.S then
+                    Nav.Backward = false
+                elseif Input.KeyCode == Enum.KeyCode.A then
+                    Nav.Left = false
+                elseif Input.KeyCode == Enum.KeyCode.D then
+                    Nav.Right = false
+                end
+            end
+        end)
+        
+        C3 = Camera:GetPropertyChangedSignal("CFrame"):Connect(function()
+            if Nav.Flying then
+                Root.CFrame = CFrame.new(Root.CFrame.Position, Root.CFrame.Position + Camera.CFrame.LookVector)
+            end
+        end)
+        
+        while true do
+            local Delta = OnRender:Wait()
+            if Nav.Flying then
+                if Nav.Forward then
+                    Root.CFrame = Root.CFrame + (Camera.CFrame.LookVector * (Delta * _G.FlySpeed))
+                end
+                if Nav.Backward then
+                    Root.CFrame = Root.CFrame + (-Camera.CFrame.LookVector * (Delta * _G.FlySpeed))
+                end
+                if Nav.Left then
+                    Root.CFrame = Root.CFrame + (-Camera.CFrame.RightVector * (Delta * _G.FlySpeed))
+                end
+                if Nav.Right then
+                    Root.CFrame = Root.CFrame + (Camera.CFrame.RightVector * (Delta * _G.FlySpeed))
+                end
+            end
+        end
+    end)
+end)
+
+FlySection:NewSlider("Fly Speed", "Speed of the Fly!", 250, 10, function(s) -- 250 (MaxValue) | 0 (MinValue)
+    _G.FlySpeed = s
+end)
+
+FlySection:NewKeybind("Toggle GUI!", "The Key to Toggle the UI!", Enum.KeyCode.RightShift, function()
+	Library:ToggleUI()
+end)
