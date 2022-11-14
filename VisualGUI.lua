@@ -1187,7 +1187,7 @@ function Library:CreateWindow(HubName, GameName, IntroText, IntroIcon, ImprovePe
                 ImageTransparency = 1,
                 BorderSizePixel = 0,
                 AnchorPoint = Vector2.new(0.5, 0.5),
-                Position = UDim2.new(0.8, 0, 0.8, 40),
+                Position = UDim2.new(0.2, 0, 0.2, 12),
                 ZIndex = 3,
                 Size = UDim2.new(0, 800, 0, 800),
                 Image = IntroIcon,
