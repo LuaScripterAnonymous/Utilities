@@ -1187,9 +1187,9 @@ function Library:CreateWindow(HubName, GameName, IntroText, IntroIcon, ImprovePe
                 ImageTransparency = 1,
                 BorderSizePixel = 0,
                 AnchorPoint = Vector2.new(0.5, 0.5),
-                Position = UDim2.new(0.5, 0, 0.4, 20),
+                Position = UDim2.new(0.5, 0, 0.5, 10),
                 ZIndex = 3,
-                Size = UDim2.new(0, 800, 0, 800),
+                Size = UDim2.new(0, 600, 0, 600),
                 Image = IntroIcon,
                 ScaleType = Enum.ScaleType.Fit
             })
