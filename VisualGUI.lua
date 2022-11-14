@@ -376,7 +376,7 @@ do
                         Utility:Create('UIPadding', {
                             Name = 'NotificationTitlePadding',
                             PaddingLeft = UDim.new(0, 7)
-                        })
+                        }
                     }),
                     Utility:Create('TextLabel', {
                         Name = 'NotificationText',
@@ -1189,7 +1189,7 @@ function Library:CreateWindow(HubName, GameName, IntroText, IntroIcon, ImprovePe
                 AnchorPoint = Vector2.new(0.5, 0.5),
                 Position = UDim2.new(0.5, 0, 0.5, 20),
                 ZIndex = 3,
-                Size = UDim2.new(0, 620, 0, 520),
+                Size = UDim2.new(0, 620, 0, 550),
                 Image = IntroIcon,
                 ScaleType = Enum.ScaleType.Fit
             })
